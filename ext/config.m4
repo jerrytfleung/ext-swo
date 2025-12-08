@@ -90,5 +90,8 @@ if test "$PHP_SWO" != "no"; then
   dnl In case of no dependencies
   AC_DEFINE(HAVE_SWO, 1, [ Have swo support ])
 
-  PHP_NEW_EXTENSION(swo, swo.c, $ext_shared,, "-Wall -Wextra -Werror -Wno-unused-parameter")
+  dnl Enable C++
+  PHP_REQUIRE_CXX()
+
+  PHP_NEW_EXTENSION(swo, swo.c service.cpp setting_service.cpp setting_service_c_wrapper.cpp, $ext_shared,, "-Wall -Wextra -Werror -Wno-unused-parameter",cxx)
 fi

@@ -2,25 +2,26 @@
 #define EXT_SERVICE_H
 
 #include <condition_variable>
-#include <thread>
 #include <mutex>
+#include <thread>
 
 namespace Solarwinds {
-    class Service {
-    public:
-        Service(int interval);
-        virtual ~Service();
-        virtual void task() = 0;
-    protected:
-        void start();
-        void stop();
+class Service {
+public:
+  Service(int interval);
+  virtual ~Service();
+  virtual void task() = 0;
 
-        std::mutex mutex_;
-        std::condition_variable cv_;
-        std::thread th_;
-        bool stopping_;
-        int interval_;
-    };
-}
+protected:
+  void start();
+  void stop();
 
-#endif //EXT_SERVICE_H
+  std::mutex mutex_;
+  std::condition_variable cv_;
+  std::thread th_;
+  bool stopping_;
+  int interval_;
+};
+} // namespace Solarwinds
+
+#endif // EXT_SERVICE_H

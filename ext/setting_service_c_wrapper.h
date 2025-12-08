@@ -5,21 +5,21 @@
 extern "C" {
 #endif
 
-    /**
-     * Allocate a Solarwinds::SettingService object
-     * @return
-     */
-    void* Setting_Service_Allocate();
+/**
+ * Allocate a Solarwinds::SettingService object
+ * @return
+ */
+void *Setting_Service_Allocate();
 
-    /**
-     * Free a Solarwinds::SettingService object
-     * @param service void*
-     * @return
-     */
-    void Setting_Service_Free(void* service);
+/**
+ * Free a Solarwinds::SettingService object
+ * @param service void*
+ * @return
+ */
+void Setting_Service_Free(void *service);
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif //EXT_SETTING_SERVICE_C_WRAPPER_H
+#endif // EXT_SETTING_SERVICE_C_WRAPPER_H

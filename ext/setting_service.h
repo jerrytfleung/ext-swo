@@ -4,13 +4,14 @@
 #include "service.h"
 
 namespace Solarwinds {
-    class SettingService : public Service {
-        static constexpr int DEFAULT_REFRESH_INTERVAL_MS = 60000;
-    public:
-        SettingService(int refresh_interval_ms = DEFAULT_REFRESH_INTERVAL_MS);
-        virtual ~SettingService();
-        virtual void task() override;
-    };
-}
+class SettingService : public Service {
+  static constexpr int DEFAULT_REFRESH_INTERVAL_MS = 60000;
 
-#endif //EXT_SETTING_SERVICE_H
+public:
+  SettingService(int refresh_interval_ms = DEFAULT_REFRESH_INTERVAL_MS);
+  virtual ~SettingService();
+  virtual void task() override;
+};
+} // namespace Solarwinds
+
+#endif // EXT_SETTING_SERVICE_H

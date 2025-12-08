@@ -7,8 +7,8 @@
 #include "php.h"
 #include "ext/standard/info.h"
 #include "php_swo.h"
-#include "swo_arginfo.h"
 #include "setting_service_c_wrapper.h"
+#include "swo_arginfo.h"
 
 /* For compatibility with older PHP versions */
 #ifndef ZEND_PARSE_PARAMETERS_NONE
@@ -20,8 +20,8 @@
 ZEND_DECLARE_MODULE_GLOBALS(swo)
 
 PHP_INI_BEGIN()
-STD_PHP_INI_ENTRY("swo.collector", "", PHP_INI_ALL, OnUpdateString,
-                  collector, zend_swo_globals, swo_globals)
+STD_PHP_INI_ENTRY("swo.collector", "", PHP_INI_ALL, OnUpdateString, collector,
+                  zend_swo_globals, swo_globals)
 STD_PHP_INI_ENTRY("swo.service_key", "", PHP_INI_ALL, OnUpdateString,
                   service_key, zend_swo_globals, swo_globals)
 PHP_INI_END()
@@ -74,7 +74,6 @@ PHP_MSHUTDOWN_FUNCTION(swo) {
 }
 /* }}} */
 
-
 /* {{{ PHP_RINIT_FUNCTION */
 PHP_RINIT_FUNCTION(swo) {
 #if defined(ZTS) && defined(COMPILE_DL_SWO)
@@ -95,22 +94,20 @@ PHP_MINFO_FUNCTION(swo) {
 /* }}} */
 
 /* {{{ PHP_GINIT_FUNCTION */
-PHP_GINIT_FUNCTION(swo) {
-  ZEND_SECURE_ZERO(swo_globals, sizeof(*swo_globals));
-}
+PHP_GINIT_FUNCTION(swo) { ZEND_SECURE_ZERO(swo_globals, sizeof(*swo_globals)); }
 /* }}} */
 
 /* {{{ swo_module_entry */
 zend_module_entry swo_module_entry = {
     STANDARD_MODULE_HEADER,
-    "swo",           /* Extension name */
-    ext_functions,   /* zend_function_entry */
-    PHP_MINIT(swo),  /* PHP_MINIT - Module initialization */
+    "swo",              /* Extension name */
+    ext_functions,      /* zend_function_entry */
+    PHP_MINIT(swo),     /* PHP_MINIT - Module initialization */
     PHP_MSHUTDOWN(swo), /* PHP_MSHUTDOWN - Module shutdown */
-    PHP_RINIT(swo),  /* PHP_RINIT - Request initialization */
-    NULL,            /* PHP_RSHUTDOWN - Request shutdown */
-    PHP_MINFO(swo),  /* PHP_MINFO - Module info */
-    PHP_SWO_VERSION, /* Version */
+    PHP_RINIT(swo),     /* PHP_RINIT - Request initialization */
+    NULL,               /* PHP_RSHUTDOWN - Request shutdown */
+    PHP_MINFO(swo),     /* PHP_MINFO - Module info */
+    PHP_SWO_VERSION,    /* Version */
     PHP_MODULE_GLOBALS(swo),
     PHP_GINIT(swo),
     NULL,

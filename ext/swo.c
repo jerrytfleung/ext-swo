@@ -9,6 +9,9 @@
 #include "php_swo.h"
 #include "setting_service_c_wrapper.h"
 #include "swo_arginfo.h"
+#ifndef _WIN32
+#include <pthread.h>
+#endif
 
 /* For compatibility with older PHP versions */
 #ifndef ZEND_PARSE_PARAMETERS_NONE
@@ -51,6 +54,12 @@ PHP_FUNCTION(test2) {
 }
 /* }}}*/
 
+#ifndef _WIN32
+void prefork() { Setting_Service_Free(SWO_G(setting_service)); }
+
+void postfork() { SWO_G(setting_service) = Setting_Service_Allocate(); }
+#endif
+
 /* {{{ PHP_MINIT_FUNCTION */
 PHP_MINIT_FUNCTION(swo) {
 #if defined(ZTS) && defined(COMPILE_DL_SWO)
@@ -59,6 +68,10 @@ PHP_MINIT_FUNCTION(swo) {
   REGISTER_INI_ENTRIES();
 
   SWO_G(setting_service) = Setting_Service_Allocate();
+
+#ifndef _WIN32
+  pthread_atfork(prefork, postfork, postfork);
+#endif
 
   return SUCCESS;
 }

@@ -7,9 +7,11 @@ extern "C" {
 
 /**
  * Allocate a Solarwinds::SettingService object
+ * @param collector char*
+ * @param service_key char*
  * @return
  */
-void *Setting_Service_Allocate();
+void *Setting_Service_Allocate(char *collector, char *service_key);
 
 /**
  * Free a Solarwinds::SettingService object

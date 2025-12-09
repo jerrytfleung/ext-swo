@@ -57,7 +57,10 @@ PHP_FUNCTION(test2) {
 #ifndef _WIN32
 void prefork() { Setting_Service_Free(SWO_G(setting_service)); }
 
-void postfork() { SWO_G(setting_service) = Setting_Service_Allocate(); }
+void postfork() {
+  SWO_G(setting_service) =
+      Setting_Service_Allocate(SWO_G(collector), SWO_G(service_key));
+}
 #endif
 
 /* {{{ PHP_MINIT_FUNCTION */
@@ -67,7 +70,8 @@ PHP_MINIT_FUNCTION(swo) {
 #endif
   REGISTER_INI_ENTRIES();
 
-  SWO_G(setting_service) = Setting_Service_Allocate();
+  SWO_G(setting_service) =
+      Setting_Service_Allocate(SWO_G(collector), SWO_G(service_key));
 
 #ifndef _WIN32
   pthread_atfork(prefork, postfork, postfork);

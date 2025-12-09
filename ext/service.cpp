@@ -8,6 +8,7 @@ using namespace std::chrono_literals;
 
 namespace Solarwinds {
     Service::Service(int interval) : stopping_(false), interval_(interval) {
+        init_ = false;
     }
 
     Service::~Service() {
@@ -18,9 +19,13 @@ namespace Solarwinds {
             th_ = std::thread([&]() {
                 while (true) {
                     std::unique_lock<std::mutex> lock(mutex_);
-                    if (cv_.wait_for(lock, interval_ * 1ms, [&]() { return stopping_; })) {
+                    if (cv_.wait_for(lock, interval_ * 1ms, [&]() { return stopping_ || !init_; })) {
                         if (stopping_) {
                             break;
+                        }
+                        if (!init_) {
+                            init_ = true;
+                            task();
                         }
                     } else {
                         task();

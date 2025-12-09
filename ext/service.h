@@ -21,6 +21,7 @@ protected:
   std::thread th_;
   bool stopping_;
   int interval_;
+  bool init_;
 };
 } // namespace Solarwinds
 

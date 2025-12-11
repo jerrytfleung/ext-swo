@@ -2,6 +2,7 @@
 #define EXT_SETTING_SERVICE_H
 
 #include "service.h"
+#include <string>
 
 namespace Solarwinds {
 class SettingService : public Service {

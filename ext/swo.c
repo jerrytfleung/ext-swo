@@ -23,36 +23,21 @@
 ZEND_DECLARE_MODULE_GLOBALS(swo)
 
 PHP_INI_BEGIN()
-STD_PHP_INI_ENTRY("swo.collector", "", PHP_INI_ALL, OnUpdateString, collector,
-                  zend_swo_globals, swo_globals)
-STD_PHP_INI_ENTRY("swo.service_key", "", PHP_INI_ALL, OnUpdateString,
-                  service_key, zend_swo_globals, swo_globals)
+STD_PHP_INI_ENTRY("swo.collector", "apm.collector.na-01.cloud.solarwinds.com", PHP_INI_SYSTEM, OnUpdateString, collector, zend_swo_globals, swo_globals)
+STD_PHP_INI_ENTRY("swo.service_key", "", PHP_INI_SYSTEM, OnUpdateString, service_key, zend_swo_globals, swo_globals)
 PHP_INI_END()
 
-/* {{{ void test1() */
-PHP_FUNCTION(test1) {
+/* {{{ void Solarwinds\\Sampler\\setting() */
+PHP_FUNCTION(Solarwinds_Sampler_setting) {
   ZEND_PARSE_PARAMETERS_NONE();
-
-  php_printf("The extension %s is loaded and working!\r\n", "swo");
+  const char* res = Setting_Service_Get_Setting(SWO_G(setting_service));
+  if (res != NULL) {
+    RETURN_STRING(res);
+  } else {
+    RETURN_STRING("");
+  }
 }
 /* }}} */
-
-/* {{{ string test2( [ string $var ] ) */
-PHP_FUNCTION(test2) {
-  char *var = "World";
-  size_t var_len = sizeof("World") - 1;
-  zend_string *retval;
-
-  ZEND_PARSE_PARAMETERS_START(0, 1)
-  Z_PARAM_OPTIONAL
-  Z_PARAM_STRING(var, var_len)
-  ZEND_PARSE_PARAMETERS_END();
-
-  retval = strpprintf(0, "Hello %s", var);
-
-  RETURN_STR(retval);
-}
-/* }}}*/
 
 #ifndef _WIN32
 void prefork() { Setting_Service_Free(SWO_G(setting_service)); }

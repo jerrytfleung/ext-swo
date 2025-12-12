@@ -20,6 +20,13 @@ void *Setting_Service_Allocate(char *collector, char *service_key);
  */
 void Setting_Service_Free(void *service);
 
+/**
+ * Get current setting from Solarwinds::SettingService object
+ * @param service void*
+ * @return const char*
+ */
+const char *Setting_Service_Get_Setting(void *service);
+
 #ifdef __cplusplus
 }
 #endif

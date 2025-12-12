@@ -2,6 +2,6 @@
 
 /** @generate-function-entries */
 
-function test1(): void {}
+namespace Solarwinds\Sampler;
 
-function test2(string $str = ""): string {}
+function setting(): string {}

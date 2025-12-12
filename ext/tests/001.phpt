@@ -1,11 +1,7 @@
 --TEST--
 Check if swo is loaded
---SKIPIF--
-<?php
-if (!extension_loaded('swo')) {
-    echo 'skip';
-}
-?>
+--EXTENSIONS--
+swo
 --FILE--
 <?php
 echo 'The extension "swo" is available';

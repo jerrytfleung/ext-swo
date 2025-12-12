@@ -1,17 +1,19 @@
 --TEST--
-test1() Basic test
---SKIPIF--
-<?php
-if (!extension_loaded('swo')) {
-    echo 'skip';
-}
-?>
+\Solarwinds\Sampler\setting() Basic test
+--EXTENSIONS--
+swo
+--INI--
+swo.service_key=token:unknown
 --FILE--
 <?php
-$ret = test1();
+$ret = \Solarwinds\Sampler\setting();
+var_dump(strlen($ret) == 0);
 
-var_dump($ret);
+sleep(1);
+
+$ret = \Solarwinds\Sampler\setting();
+var_dump(strlen($ret) > 0);
 ?>
 --EXPECT--
-The extension swo is loaded and working!
-NULL
+bool(true)
+bool(false)

@@ -23,14 +23,17 @@
 ZEND_DECLARE_MODULE_GLOBALS(swo)
 
 PHP_INI_BEGIN()
-STD_PHP_INI_ENTRY("swo.collector", "apm.collector.na-01.cloud.solarwinds.com", PHP_INI_SYSTEM, OnUpdateString, collector, zend_swo_globals, swo_globals)
-STD_PHP_INI_ENTRY("swo.service_key", "", PHP_INI_SYSTEM, OnUpdateString, service_key, zend_swo_globals, swo_globals)
+STD_PHP_INI_ENTRY("swo.collector", "apm.collector.na-01.cloud.solarwinds.com",
+                  PHP_INI_SYSTEM, OnUpdateString, collector, zend_swo_globals,
+                  swo_globals)
+STD_PHP_INI_ENTRY("swo.service_key", "", PHP_INI_SYSTEM, OnUpdateString,
+                  service_key, zend_swo_globals, swo_globals)
 PHP_INI_END()
 
 /* {{{ void Solarwinds\\Sampler\\setting() */
 PHP_FUNCTION(Solarwinds_Sampler_setting) {
   ZEND_PARSE_PARAMETERS_NONE();
-  const char* res = Setting_Service_Get_Setting(SWO_G(setting_service));
+  const char *res = Setting_Service_Get_Setting(SWO_G(setting_service));
   if (res != NULL) {
     RETURN_STRING(res);
   } else {

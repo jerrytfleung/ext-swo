@@ -2,8 +2,8 @@
 #define EXT_SETTING_SERVICE_H
 
 #include "service.h"
-#include <string>
 #include <mutex>
+#include <string>
 
 namespace Solarwinds {
 class SettingService : public Service {
@@ -23,7 +23,6 @@ private:
   std::string service_name_;
   std::mutex setting_mutex_;
   std::string setting_;
-
 };
 } // namespace Solarwinds
 

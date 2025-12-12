@@ -24,9 +24,9 @@ ZEND_DECLARE_MODULE_GLOBALS(swo)
 
 PHP_INI_BEGIN()
 STD_PHP_INI_ENTRY("swo.collector", "apm.collector.na-01.cloud.solarwinds.com",
-                  PHP_INI_SYSTEM, OnUpdateString, collector, zend_swo_globals,
+                  PHP_INI_ALL, OnUpdateString, collector, zend_swo_globals,
                   swo_globals)
-STD_PHP_INI_ENTRY("swo.service_key", "", PHP_INI_SYSTEM, OnUpdateString,
+STD_PHP_INI_ENTRY("swo.service_key", "", PHP_INI_ALL, OnUpdateString,
                   service_key, zend_swo_globals, swo_globals)
 PHP_INI_END()
 

@@ -62,7 +62,7 @@ namespace Solarwinds {
             std::unique_lock<std::mutex> lock(setting_mutex_);
             setting_ = response_body;
         }
-        php_printf("Time: %lu SettingService pid: %u Updated setting: %s\n", (long)time(NULL), getpid(), setting_.c_str());
+        // php_printf("Time: %lu SettingService pid: %u Updated setting: %s\n", (long)time(NULL), getpid(), setting_.c_str());
     }
 
     std::string SettingService::getSetting(){

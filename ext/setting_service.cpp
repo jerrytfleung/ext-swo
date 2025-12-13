@@ -29,8 +29,6 @@ namespace Solarwinds {
     }
 
     void SettingService::task() {
-        php_printf("Time: %lu SettingService pid: %u Fetching settings from collector %s for service %s on host %s\n", (long)time(NULL), getpid(), collector_.c_str(), service_name_.c_str(), hostname_.c_str());
-
         auto url = "https://" + collector_ + "/v1/settings/" + service_name_ + "/" + hostname_;
         curl_easy_setopt(curl_, CURLOPT_URL, url.c_str());
         curl_easy_setopt(curl_, CURLOPT_FOLLOWLOCATION, 1L);

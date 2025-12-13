@@ -45,12 +45,10 @@ PHP_FUNCTION(Solarwinds_Sampler_setting) {
 
 #ifndef _WIN32
 void prefork() {
-  php_printf("Time: %lu swo extension prefork called in pid: %u\n", (long)time(NULL), getpid());
   Setting_Service_Free(SWO_G(setting_service));
 }
 
 void postfork() {
-  php_printf("Time: %lu swo extension postfork called in pid: %u\n", (long)time(NULL), getpid());
   SWO_G(setting_service) = Setting_Service_Allocate(SWO_G(collector), SWO_G(service_key));
 }
 #endif

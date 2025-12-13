@@ -53,16 +53,14 @@ void postfork() {
 
 /* {{{ PHP_MINIT_FUNCTION */
 PHP_MINIT_FUNCTION(swo) {
-#ifndef _WIN32
-  pthread_atfork(prefork, postfork, postfork);
-#endif
 #if defined(ZTS) && defined(COMPILE_DL_SWO)
   ZEND_TSRMLS_CACHE_UPDATE();
 #endif
   REGISTER_INI_ENTRIES();
 
-  SWO_G(setting_service) =
-      Setting_Service_Allocate(SWO_G(collector), SWO_G(service_key));
+#ifndef _WIN32
+  pthread_atfork(prefork, postfork, postfork);
+#endif
 
   return SUCCESS;
 }
@@ -83,6 +81,9 @@ PHP_RINIT_FUNCTION(swo) {
 #if defined(ZTS) && defined(COMPILE_DL_SWO)
   ZEND_TSRMLS_CACHE_UPDATE();
 #endif
+  if (SWO_G(setting_service) == NULL) {
+    SWO_G(setting_service) = Setting_Service_Allocate(SWO_G(collector), SWO_G(service_key));
+  }
 
   return SUCCESS;
 }

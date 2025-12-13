@@ -24,7 +24,7 @@ namespace Solarwinds {
                     php_printf("Service pid: %u Create lock\n", getpid());
                     std::unique_lock<std::mutex> lock(mutex_);
                     php_printf("Service pid: %u conditional variable wait for\n", getpid());
-                    if (cv_.wait_for(lock, interval_ * 1ms, [&]() { return stopping_ || !init_; })) {
+                    if (cv_.wait_for(lock, interval_ * 1s, [&]() { return stopping_ || !init_; })) {
                         if (stopping_) {
                             php_printf("Service pid: %u Stopping\n", getpid());
                             break;

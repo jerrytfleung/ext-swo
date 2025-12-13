@@ -8,11 +8,11 @@
 
 namespace Solarwinds {
 class SettingService : public Service {
-  static constexpr int DEFAULT_REFRESH_INTERVAL_MS = 1000;
+  static constexpr int DEFAULT_REFRESH_INTERVAL_S = 20;
 
 public:
   SettingService(const std::string &service_key, const std::string &collector,
-                 int refresh_interval_ms = DEFAULT_REFRESH_INTERVAL_MS);
+                 int refresh_interval_ms = DEFAULT_REFRESH_INTERVAL_S);
   virtual ~SettingService();
   virtual void task() override;
   std::string getSetting();

@@ -59,6 +59,7 @@ namespace Solarwinds {
             } else {
                 std::unique_lock<std::mutex> lock(setting_mutex_);
                 setting_ = response_body;
+                php_printf("SettingService pid: %u Updated setting: %s\n", getpid(), setting_.c_str());
             }
             curl_easy_cleanup(curl);
         } else {

@@ -1,6 +1,7 @@
 #include "setting_service.h"
 #include <sys/types.h>
 #include <unistd.h>
+#include <time.h>
 #include "php.h"
 
 namespace Solarwinds {
@@ -28,7 +29,7 @@ namespace Solarwinds {
     }
 
     void SettingService::task() {
-        php_printf("SettingService pid: %u Fetching settings from collector %s for service %s on host %s\n", getpid(), collector_.c_str(), service_name_.c_str(), hostname_.c_str());
+        php_printf("Time: %lu SettingService pid: %u Fetching settings from collector %s for service %s on host %s\n", (long)time(NULL), getpid(), collector_.c_str(), service_name_.c_str(), hostname_.c_str());
 
         auto url = "https://" + collector_ + "/v1/settings/" + service_name_ + "/" + hostname_;
         curl_easy_setopt(curl_, CURLOPT_URL, url.c_str());
@@ -50,19 +51,19 @@ namespace Solarwinds {
         auto res = curl_easy_perform(curl_);
         curl_slist_free_all(headers);
         if (res != CURLE_OK) {
-            php_printf("curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
+            php_printf("Time: %lu curl_easy_perform() failed: %s\n", (long)time(NULL), curl_easy_strerror(res));
         }
         long http_code = 0;
         curl_easy_getinfo(curl_, CURLINFO_RESPONSE_CODE, &http_code);
         if (http_code != 200) {
-            php_printf("HTTP request failed with code: %ld\n", http_code);
+            php_printf("Time: %lu HTTP request failed with code: %ld\n", (long)time(NULL), http_code);
             return;
         }
         {
             std::unique_lock<std::mutex> lock(setting_mutex_);
             setting_ = response_body;
         }
-        php_printf("SettingService pid: %u Updated setting: %s\n", getpid(), setting_.c_str());
+        php_printf("Time: %lu SettingService pid: %u Updated setting: %s\n", (long)time(NULL), getpid(), setting_.c_str());
     }
 
     std::string SettingService::getSetting(){

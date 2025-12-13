@@ -12,6 +12,7 @@
 #ifndef _WIN32
 #include <pthread.h>
 #endif
+#include <time.h>
 
 /* For compatibility with older PHP versions */
 #ifndef ZEND_PARSE_PARAMETERS_NONE
@@ -43,11 +44,14 @@ PHP_FUNCTION(Solarwinds_Sampler_setting) {
 /* }}} */
 
 #ifndef _WIN32
-void prefork() { Setting_Service_Free(SWO_G(setting_service)); }
+void prefork() {
+  php_printf("Time: %lu swo extension prefork called in pid: %u\n", (long)time(NULL), getpid());
+  Setting_Service_Free(SWO_G(setting_service));
+}
 
 void postfork() {
-  SWO_G(setting_service) =
-      Setting_Service_Allocate(SWO_G(collector), SWO_G(service_key));
+  php_printf("Time: %lu swo extension postfork called in pid: %u\n", (long)time(NULL), getpid());
+  SWO_G(setting_service) = Setting_Service_Allocate(SWO_G(collector), SWO_G(service_key));
 }
 #endif
 

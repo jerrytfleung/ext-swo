@@ -23,13 +23,14 @@ void Setting_Service_Free(void* service) {
     }
 }
 
-const char* Setting_Service_Get_Setting(void *service) {
+bool Setting_Service_Get_Setting(void *service, char* ans) {
     if (service != nullptr) {
         auto s = static_cast<Solarwinds::SettingService *>(service);
         if (s != nullptr) {
-            static auto setting = s->getSetting();
-            return setting.c_str();
+            auto setting = s->getSetting();
+            strncpy(ans, setting.c_str(), setting.size());
+            return true;
         }
     }
-    return nullptr;
+    return false;
 }

@@ -34,12 +34,9 @@ PHP_INI_END()
 /* {{{ void Solarwinds\\Sampler\\setting() */
 PHP_FUNCTION(Solarwinds_Sampler_setting) {
   ZEND_PARSE_PARAMETERS_NONE();
-  const char *res = Setting_Service_Get_Setting(SWO_G(setting_service));
-  if (res != NULL) {
-    RETURN_STRING(res);
-  } else {
-    RETURN_STRING("");
-  }
+  char setting[1024] = {0};
+  Setting_Service_Get_Setting(SWO_G(setting_service), setting);
+  RETURN_STRING(setting);
 }
 /* }}} */
 

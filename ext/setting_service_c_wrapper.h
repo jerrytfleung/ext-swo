@@ -23,9 +23,10 @@ void Setting_Service_Free(void *service);
 /**
  * Get current setting from Solarwinds::SettingService object
  * @param service void*
- * @return const char*
+ * @param ans char*
+ * @return bool
  */
-const char *Setting_Service_Get_Setting(void *service);
+bool Setting_Service_Get_Setting(void *service, char* ans);
 
 #ifdef __cplusplus
 }

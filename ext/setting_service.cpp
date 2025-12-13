@@ -49,20 +49,20 @@ namespace Solarwinds {
         auto res = curl_easy_perform(curl_);
         curl_slist_free_all(headers);
         if (res != CURLE_OK) {
-            // php_printf("Time: %lu curl_easy_perform() failed: %s\n", (long)time(NULL), curl_easy_strerror(res));
+            php_printf("Time: %lu curl_easy_perform() failed: %s\n", (long)time(NULL), curl_easy_strerror(res));
             return;
         }
         long http_code = 0;
         curl_easy_getinfo(curl_, CURLINFO_RESPONSE_CODE, &http_code);
         if (http_code != 200) {
-            // php_printf("Time: %lu HTTP request failed with code: %ld\n", (long)time(NULL), http_code);
+            php_printf("Time: %lu HTTP request failed with code: %ld\n", (long)time(NULL), http_code);
             return;
         }
         {
             std::unique_lock<std::mutex> lock(setting_mutex_);
             setting_ = response_body;
         }
-        // php_printf("Time: %lu SettingService pid: %u Updated setting: %s\n", (long)time(NULL), getpid(), setting_.c_str());
+        php_printf("Time: %lu SettingService pid: %u Updated setting: %s\n", (long)time(NULL), getpid(), setting_.c_str());
     }
 
     std::string SettingService::getSetting(){

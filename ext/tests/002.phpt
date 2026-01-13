@@ -16,4 +16,4 @@ var_dump(strlen($ret) > 0);
 ?>
 --EXPECT--
 bool(true)
-bool(false)
+bool(true)

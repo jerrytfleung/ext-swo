@@ -3,8 +3,6 @@
 #include "service.h"
 #include <chrono>
 #include <system_error>
-#include <sys/types.h>
-#include <unistd.h>
 #include <time.h>
 #include "php.h"
 

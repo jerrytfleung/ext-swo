@@ -5,6 +5,9 @@ ARG_ENABLE('swo', 'swo support', 'no');
 if (PHP_SWO != 'no') {
     AC_DEFINE('HAVE_SWO', 1, 'swo support enabled');
 
+    MESSAGE('=========');
+    MESSAGE(PHP_SWO);
+    MESSAGE('=========');
     var curl_location;
     if ((curl_location = CHECK_LIB("libcurl_a.lib;libcurl.lib", "curl", PHP_SWO)) &&
         CHECK_HEADER_ADD_INCLUDE("curl/easy.h", "CFLAGS_SWO") &&

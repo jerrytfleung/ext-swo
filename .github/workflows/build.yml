@@ -28,7 +28,11 @@ jobs:
         uses: shivammathur/setup-php@bf6b4fbd49ca58e4608c9c89fba0b8d90bd2a39f # v2
         with:
           php-version: ${{ matrix.php }}
-          extensions: curl
+      - name: Show C extension
+        run: |
+          php -m
+          which php
+        shell: bash
       - name: Install libcurl
         run: |
           sudo apt-get update

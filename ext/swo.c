@@ -7,7 +7,7 @@
 #include "php.h"
 #include "ext/standard/info.h"
 #include "php_swo.h"
-#include "setting_service_c_wrapper.h"
+// #include "setting_service_c_wrapper.h"
 #include "swo_arginfo.h"
 #ifndef _WIN32
 #include <pthread.h>
@@ -35,18 +35,18 @@ PHP_INI_END()
 PHP_FUNCTION(Solarwinds_Sampler_setting) {
   ZEND_PARSE_PARAMETERS_NONE();
   char setting[1024] = {0};
-  Setting_Service_Get_Setting(SWO_G(setting_service), setting);
+  // Setting_Service_Get_Setting(SWO_G(setting_service), setting);
   RETURN_STRING(setting);
 }
 /* }}} */
 
 #ifndef _WIN32
 void prefork() {
-  Setting_Service_Free(SWO_G(setting_service));
+  // Setting_Service_Free(SWO_G(setting_service));
 }
 
 void postfork() {
-  SWO_G(setting_service) = Setting_Service_Allocate(SWO_G(collector), SWO_G(service_key));
+  // SWO_G(setting_service) = Setting_Service_Allocate(SWO_G(collector), SWO_G(service_key));
 }
 #endif
 
@@ -57,7 +57,7 @@ PHP_MINIT_FUNCTION(swo) {
 #endif
   REGISTER_INI_ENTRIES();
 
-  SWO_G(setting_service) = Setting_Service_Allocate(SWO_G(collector), SWO_G(service_key));
+  // SWO_G(setting_service) = Setting_Service_Allocate(SWO_G(collector), SWO_G(service_key));
 
 #ifndef _WIN32
   pthread_atfork(prefork, postfork, postfork);
@@ -69,7 +69,7 @@ PHP_MINIT_FUNCTION(swo) {
 
 /* {{{ PHP_MSHUTDOWN_FUNCTION */
 PHP_MSHUTDOWN_FUNCTION(swo) {
-  Setting_Service_Free(SWO_G(setting_service));
+  // Setting_Service_Free(SWO_G(setting_service));
 
   UNREGISTER_INI_ENTRIES();
 

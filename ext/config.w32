@@ -20,7 +20,7 @@ if (PHP_SWO != 'no') {
         AC_DEFINE('HAVE_SWO', 1, "Define to 1 if the PHP extension 'swo' is available.");
         ADD_FLAG("CFLAGS_SWO", "/D PHP_SWO_EXPORTS=1");
         if (curl_location.match(/libcurl_a\.lib$/)) {
-            ADD_FLAG("CFLAGS_SWO", "/D SWO_STATICLIB");
+            ADD_FLAG("CFLAGS_SWO", "/D CURL_STATICLIB");
         }
         PHP_INSTALL_HEADERS("swo", "php_swo.h");
     } else {

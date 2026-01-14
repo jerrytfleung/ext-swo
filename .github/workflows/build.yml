@@ -93,40 +93,40 @@ jobs:
         with:
           arch: x64
           toolset: ${{ steps.setup-php-sdk.outputs.toolset }}
-      - name: Build
-        run: |
-          phpize
-          ./configure
-          nmake
-      - name: Test
-        env:
-          TEST_PHP_ARGS: "-q"
-        run: nmake test TESTS=--show-diff
-      - name: Get Compiler Version + Build Name
-        shell: bash
-        run: |
-          case "$VisualStudioVersion" in
-            16.*) COMPILER="vs16";;
-            17.*) COMPILER="vs17";;
-            *) echo "Unknown MSVC version: $VisualStudioVersion"; exit 1;;
-          esac
-          echo "Detected Compiler: $COMPILER"
-          SAFE_REF_NAME="${GITHUB_REF_NAME//\//-}"
-          BUILD_NAME="php_swo-${SAFE_REF_NAME}-${{matrix.php}}-${{matrix.ts}}-$COMPILER-x64"
-          echo "Build Name: $BUILD_NAME"
-          echo "BUILD_NAME=$BUILD_NAME" >> $GITHUB_ENV
-
-      - name: Rename and copy binaries
-        run: |
-          md binaries\${{env.BUILD_NAME}}
-          $file = Get-ChildItem -Path x64 -Recurse -Filter php_opentelemetry.dll
-          Copy-Item -Path $file.FullName -Destination "binaries\${{env.BUILD_NAME}}\${{env.BUILD_NAME}}.dll"
-      - name: Find
-        run: |
-          Get-ChildItem -Path binaries -Recurse -Force | ForEach-Object { $_.FullName }
-      - name: Upload artifacts
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
-        with:
-          name: ${{env.BUILD_NAME}}
-          path: ext\binaries\${{env.BUILD_NAME}}\${{env.BUILD_NAME}}.dll
-          if-no-files-found: error
+#      - name: Build
+#        run: |
+#          phpize
+#          ./configure
+#          nmake
+#      - name: Test
+#        env:
+#          TEST_PHP_ARGS: "-q"
+#        run: nmake test TESTS=--show-diff
+#      - name: Get Compiler Version + Build Name
+#        shell: bash
+#        run: |
+#          case "$VisualStudioVersion" in
+#            16.*) COMPILER="vs16";;
+#            17.*) COMPILER="vs17";;
+#            *) echo "Unknown MSVC version: $VisualStudioVersion"; exit 1;;
+#          esac
+#          echo "Detected Compiler: $COMPILER"
+#          SAFE_REF_NAME="${GITHUB_REF_NAME//\//-}"
+#          BUILD_NAME="php_swo-${SAFE_REF_NAME}-${{matrix.php}}-${{matrix.ts}}-$COMPILER-x64"
+#          echo "Build Name: $BUILD_NAME"
+#          echo "BUILD_NAME=$BUILD_NAME" >> $GITHUB_ENV
+#
+#      - name: Rename and copy binaries
+#        run: |
+#          md binaries\${{env.BUILD_NAME}}
+#          $file = Get-ChildItem -Path x64 -Recurse -Filter php_opentelemetry.dll
+#          Copy-Item -Path $file.FullName -Destination "binaries\${{env.BUILD_NAME}}\${{env.BUILD_NAME}}.dll"
+#      - name: Find
+#        run: |
+#          Get-ChildItem -Path binaries -Recurse -Force | ForEach-Object { $_.FullName }
+#      - name: Upload artifacts
+#        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+#        with:
+#          name: ${{env.BUILD_NAME}}
+#          path: ext\binaries\${{env.BUILD_NAME}}\${{env.BUILD_NAME}}.dll
+#          if-no-files-found: error

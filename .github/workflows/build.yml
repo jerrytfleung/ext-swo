@@ -91,6 +91,12 @@ jobs:
         with:
           arch: x64
           toolset: ${{ steps.setup-php-sdk.outputs.toolset }}
+      - name: list extensions
+        run: |
+          php -m
+      - name: install curl
+        run: |
+          choco install curl
       - name: phpize
         run: |
           phpize

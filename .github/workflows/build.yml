@@ -97,7 +97,7 @@ jobs:
           phpize
       - name: configure
         run: |
-          ./configure
+          ./configure --enable-swo --with-prefix=${{ steps.setup-php-sdk.outputs.prefix }}
       - name: Build
         run: |
           nmake

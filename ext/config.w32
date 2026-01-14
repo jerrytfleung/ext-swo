@@ -18,8 +18,8 @@ if (PHP_SWO != 'no') {
     MESSAGE('=========');
     MESSAGE(CHECK_LIB("wldap32.lib", "curl", PHP_SWO));
     MESSAGE('=========');
-    MESSAGE(SETUP_ZLIB_LIB("curl", PHP_SWO));
-    MESSAGE('=========');
+    dnl MESSAGE(SETUP_ZLIB_LIB("curl", PHP_SWO));
+    dnl MESSAGE('=========');
     MESSAGE(CHECK_LIB("normaliz.lib", "curl", PHP_SWO));
     MESSAGE('=========');
     MESSAGE(CHECK_LIB("libssh2.lib", "curl", PHP_SWO));

@@ -12,9 +12,6 @@ dnl     [Include swo support])])
 
 dnl Otherwise use 'enable':
 
-CFLAGS="-lcurl"
-CXXFLAGS="-lcurl"
-
 PHP_ARG_ENABLE([swo],
   [whether to enable swo support],
   [AS_HELP_STRING([--enable-swo],
@@ -100,7 +97,7 @@ if test "$PHP_SWO" != "no"; then
   PKG_CHECK_MODULES([CURL], [libcurl >= 7.61.0])
     PKG_CHECK_VAR([CURL_FEATURES], [libcurl], [supported_features])
 
-    PHP_EVAL_LIBLINE([$CURL_LIBS], [CURL_SHARED_LIBADD])
+    PHP_EVAL_LIBLINE([$CURL_LIBS], [SWO_SHARED_LIBADD])
     PHP_EVAL_INCLINE([$CURL_CFLAGS])
 
     AC_MSG_CHECKING([for SSL support in libcurl])
@@ -112,7 +109,7 @@ if test "$PHP_SWO" != "no"; then
         [php_cv_lib_curl_ssl_supported], [
         save_LIBS=$LIBS
         save_CFLAGS=$CFLAGS
-        LIBS="$LIBS $CURL_SHARED_LIBADD"
+        LIBS="$LIBS $SWO_SHARED_LIBADD"
         CFLAGS="$CFLAGS $CURL_CFLAGS"
 
         AC_RUN_IFELSE([AC_LANG_PROGRAM([
@@ -165,5 +162,5 @@ if test "$PHP_SWO" != "no"; then
     [$CURL_LIBS])
 
   PHP_NEW_EXTENSION(swo, swo.c service.cpp setting_service.cpp setting_service_c_wrapper.cpp, $ext_shared,, "-Wall -Wextra -Werror -Wno-unused-parameter",cxx)
-  PHP_SUBST([CURL_SHARED_LIBADD])
+  PHP_SUBST([SWO_SHARED_LIBADD])
 fi

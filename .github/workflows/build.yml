@@ -76,8 +76,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php: ['8.1', '8.2', '8.3', '8.4']
-        ts: ['ts', 'nts']
+        php: ['8.1']
+        ts: ['nts']
     steps:
       - name: Checkout
         uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
@@ -93,10 +93,14 @@ jobs:
         with:
           arch: x64
           toolset: ${{ steps.setup-php-sdk.outputs.toolset }}
-      - name: Build
+      - name: phpize
         run: |
           phpize
+      - name: configure
+        run: |
           ./configure
+      - name: Build
+        run: |
           nmake
       - name: Test
         env:

@@ -5,5 +5,5 @@ ARG_ENABLE('swo', 'swo support', 'no');
 if (PHP_SWO != 'no') {
     AC_DEFINE('HAVE_SWO', 1, 'swo support enabled');
 
-    EXTENSION('swo', 'swo.c', PHP_SWO_SHARED, '/DZEND_ENABLE_STATIC_TSRMLS_CACHE=1');
+    EXTENSION('swo', 'swo.c setting_service_c_wrapper.cpp', PHP_SWO_SHARED, '/DZEND_ENABLE_STATIC_TSRMLS_CACHE=1');
 }

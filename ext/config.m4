@@ -161,6 +161,6 @@ if test "$PHP_SWO" != "no"; then
     [AC_MSG_FAILURE([The libcurl check failed.])],
     [$CURL_LIBS])
 
-  PHP_NEW_EXTENSION(swo, swo.c, $ext_shared,, "-Wall -Wextra -Werror -Wno-unused-parameter",cxx)
+  PHP_NEW_EXTENSION(swo, [swo.c setting_service_c_wrapper.cpp], $ext_shared,, "-Wall -Wextra -Werror -Wno-unused-parameter",cxx)
   PHP_SUBST([SWO_SHARED_LIBADD])
 fi

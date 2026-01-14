@@ -12,6 +12,9 @@ dnl     [Include swo support])])
 
 dnl Otherwise use 'enable':
 
+CFLAGS="-lcurl"
+CXXFLAGS="-lcurl"
+
 PHP_ARG_ENABLE([swo],
   [whether to enable swo support],
   [AS_HELP_STRING([--enable-swo],

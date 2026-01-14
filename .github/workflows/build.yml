@@ -97,12 +97,9 @@ jobs:
       - name: test curl
         run: |
           curl --version
-      - name: install curl
+      - name: echo %PATH%
         run: |
-          choco install curl
-      - name: test curl again
-        run: |
-          curl --version
+          echo %PATH%
       - name: phpize
         run: |
           phpize

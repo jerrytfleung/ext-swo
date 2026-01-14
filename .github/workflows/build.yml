@@ -94,9 +94,15 @@ jobs:
       - name: list extensions
         run: |
           php -m
+      - name: test curl
+        run: |
+          curl --version
       - name: install curl
         run: |
           choco install curl
+      - name: test curl again
+        run: |
+          curl --version
       - name: phpize
         run: |
           phpize

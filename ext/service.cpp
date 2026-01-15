@@ -1,6 +1,4 @@
 #include "service.h"
-
-#include "service.h"
 #include <chrono>
 #include <system_error>
 #include <time.h>
@@ -35,6 +33,7 @@ namespace Solarwinds {
                 }
             });
         } catch (const std::system_error& e) {
+            php_printf("Time: %lu System error: %s\n", (long)time(NULL), e.what());
         }
     }
     void Service::stop() {
@@ -46,6 +45,7 @@ namespace Solarwinds {
             cv_.notify_all();
             th_.join();
         } catch (const std::system_error& e) {
+            php_printf("Time: %lu System error: %s\n", (long)time(NULL), e.what());
         }
     }
 }

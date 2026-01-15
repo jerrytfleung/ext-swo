@@ -105,9 +105,10 @@ jobs:
 #      - name: Locate easy.h
 #        run: |
 #          Get-ChildItem -Path C:\ -Filter easy.h -Recurse -ErrorAction SilentlyContinue
-      - name: echo CONDA
+      - name: list directory
         run: |
-          echo $CONDA
+          dir /S
+        working-directory: C:\\Miniconda\\Library
         shell: powershell
       - name: phpize
         run: |

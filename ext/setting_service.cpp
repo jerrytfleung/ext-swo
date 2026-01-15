@@ -21,17 +21,16 @@ namespace Solarwinds {
         hostname_ = hostname;
         auto pos = service_key_.find_last_of(':');
         service_name_ = (pos != std::string::npos) ? service_key_.substr(pos+1) : "unknown";
-        // curl_ = curl_easy_init();
+        curl_ = curl_easy_init();
         start();
     }
 
     SettingService::~SettingService() {
         stop();
-        // curl_easy_cleanup(curl_);
+        curl_easy_cleanup(curl_);
     }
 
     void SettingService::task() {
-        /*
         auto url = "https://" + collector_ + "/v1/settings/" + service_name_ + "/" + hostname_;
         curl_easy_setopt(curl_, CURLOPT_URL, url.c_str());
         curl_easy_setopt(curl_, CURLOPT_FOLLOWLOCATION, 1L);
@@ -65,7 +64,6 @@ namespace Solarwinds {
             std::unique_lock<std::mutex> lock(setting_mutex_);
             setting_ = response_body;
         }
-        */
         // php_printf("Time: %lu SettingService pid: %u Updated setting: %s\n", (long)time(NULL), getpid(), setting_.c_str());
     }
 

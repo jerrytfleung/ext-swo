@@ -13,6 +13,7 @@ sleep(1);
 
 $ret = \Solarwinds\Sampler\setting();
 var_dump(strlen($ret) > 0);
+var_dump($ret);
 ?>
 --EXPECT--
 bool(true)

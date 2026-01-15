@@ -90,6 +90,9 @@ jobs:
         with:
           arch: x64
           toolset: ${{ steps.setup-php-sdk.outputs.toolset }}
+      - name: Install nghttp2
+        run: |
+          choco install nghttp2
 #      - name: list extensions
 #        run: |
 #          php -m
@@ -105,10 +108,10 @@ jobs:
 #      - name: Locate easy.h
 #        run: |
 #          Get-ChildItem -Path C:\ -Filter easy.h -Recurse -ErrorAction SilentlyContinue
-      - name: List files in C:\Miniconda\Library recursively
-        run: |
-          if (Test-Path 'C:\Miniconda\Library') { Get-ChildItem 'C:\Miniconda\Library' -Recurse } else { Write-Host 'Directory does not exist.' }
-        shell: powershell
+#      - name: List files in C:\Miniconda\Library recursively
+#        run: |
+#          if (Test-Path 'C:\Miniconda\Library') { Get-ChildItem 'C:\Miniconda\Library' -Recurse } else { Write-Host 'Directory does not exist.' }
+#        shell: powershell
       - name: phpize
         run: |
           phpize

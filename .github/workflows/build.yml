@@ -90,34 +90,37 @@ jobs:
         with:
           arch: x64
           toolset: ${{ steps.setup-php-sdk.outputs.toolset }}
-      - name: list extensions
-        run: |
-          php -m
-      - name: test curl
-        run: |
-          curl --version
-      - name: Locate libcurl.lib
-        run: |
-          Get-ChildItem -Path C:\ -Filter libcurl.lib -Recurse -ErrorAction SilentlyContinue
-      - name: Locate curl.exe
-        run: |
-          Get-ChildItem -Path C:\ -Filter curl.exe -Recurse -ErrorAction SilentlyContinue
-      - name: Locate easy.h
-        run: |
-          Get-ChildItem -Path C:\ -Filter easy.h -Recurse -ErrorAction SilentlyContinue
-#      - name: phpize
+#      - name: list extensions
 #        run: |
-#          phpize
-#      - name: configure
+#          php -m
+#      - name: test curl
 #        run: |
-#          ./configure --enable-swo --with-prefix=${{ steps.setup-php-sdk.outputs.prefix }}
-#      - name: Build
+#          curl --version
+#      - name: Locate libcurl.lib
 #        run: |
-#          nmake
-#      - name: Test
-#        env:
-#          TEST_PHP_ARGS: "-q"
-#        run: nmake test TESTS=--show-diff
+#          Get-ChildItem -Path C:\ -Filter libcurl.lib -Recurse -ErrorAction SilentlyContinue
+#      - name: Locate curl.exe
+#        run: |
+#          Get-ChildItem -Path C:\ -Filter curl.exe -Recurse -ErrorAction SilentlyContinue
+#      - name: Locate easy.h
+#        run: |
+#          Get-ChildItem -Path C:\ -Filter easy.h -Recurse -ErrorAction SilentlyContinue
+      - name: echo CONDA
+        run: |
+          echo $CONDA
+      - name: phpize
+        run: |
+          phpize
+      - name: configure
+        run: |
+          ./configure --enable-swo --with-prefix=${{ steps.setup-php-sdk.outputs.prefix }}
+      - name: Build
+        run: |
+          nmake
+      - name: Test
+        env:
+          TEST_PHP_ARGS: "-q"
+        run: nmake test TESTS=--show-diff
 #      - name: Get Compiler Version + Build Name
 #        shell: bash
 #        run: |

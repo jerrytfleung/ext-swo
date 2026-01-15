@@ -3,7 +3,7 @@
 --EXTENSIONS--
 swo
 --INI--
-swo.service_key=token:unknown
+swo.service_key=PwgwKsUjyYk05D566SzV1sGFrxT_PnS4ra3ewducWRu54auIIcxKcpUDH3cPtKJoRvtQK4A:ext-swo
 --FILE--
 <?php
 $ret = \Solarwinds\Sampler\setting();

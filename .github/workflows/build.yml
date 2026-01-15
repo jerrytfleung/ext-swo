@@ -105,9 +105,9 @@ jobs:
 #      - name: Locate easy.h
 #        run: |
 #          Get-ChildItem -Path C:\ -Filter easy.h -Recurse -ErrorAction SilentlyContinue
-      - name: list directory
+      - name: List files in C:\Miniconda\Library recursively
         run: |
-          dir /S C:\Miniconda\Library
+          if (Test-Path 'C:\Miniconda\Library') { Get-ChildItem 'C:\Miniconda\Library' -Recurse } else { Write-Host 'Directory does not exist.' }
         shell: powershell
       - name: phpize
         run: |

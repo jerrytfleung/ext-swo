@@ -75,44 +75,47 @@ jobs:
       - name: Locate libcurl.lib
         run: |
           Get-ChildItem -Path C:\ -Filter libcurl.lib -Recurse -ErrorAction SilentlyContinue
-      - name: Locate libcurl_a.lib
-        run: |
-          Get-ChildItem -Path C:\ -Filter libcurl_a.lib -Recurse -ErrorAction SilentlyContinue
       - name: Locate easy.h
         run: |
           Get-ChildItem -Path C:\ -Filter easy.h -Recurse -ErrorAction SilentlyContinue
-#  windows:
-#    runs-on: windows-2022
-#    continue-on-error: false
-#    strategy:
-#      fail-fast: false
-#      matrix:
-#        php: ['8.1']
-#        ts: ['nts']
-#    steps:
-#      - name: Checkout
-#        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
-#      - name: Install PHP ${{ matrix.php }}-${{ matrix.ts }}
-#        id: setup-php-sdk
-#        uses: php/setup-php-sdk@v0.12
-#        with:
-#          version: ${{ matrix.php }}
-#          arch: x64
-#          ts: ${{ matrix.ts }}
-#      - name: Install dependencies
-#        uses: ilammy/msvc-dev-cmd@v1
-#        with:
-#          arch: x64
-#          toolset: ${{ steps.setup-php-sdk.outputs.toolset }}
-#      - name: list extensions
-#        run: |
-#          php -m
-#      - name: test curl
-#        run: |
-#          curl --version
-#      - name: Locate libcurl.lib
-#        run: |
-#          Get-ChildItem -Path C:\ -Filter libcurl.lib -Recurse -ErrorAction SilentlyContinue
+  windows:
+    runs-on: windows-2022
+    continue-on-error: false
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ['8.1']
+        ts: ['nts']
+    steps:
+      - name: Checkout
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
+      - name: Install PHP ${{ matrix.php }}-${{ matrix.ts }}
+        id: setup-php-sdk
+        uses: php/setup-php-sdk@v0.12
+        with:
+          version: ${{ matrix.php }}
+          arch: x64
+          ts: ${{ matrix.ts }}
+      - name: Install dependencies
+        uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: x64
+          toolset: ${{ steps.setup-php-sdk.outputs.toolset }}
+      - name: list extensions
+        run: |
+          php -m
+      - name: test curl
+        run: |
+          curl --version
+      - name: Locate libcurl.lib
+        run: |
+          Get-ChildItem -Path C:\ -Filter libcurl.lib -Recurse -ErrorAction SilentlyContinue
+      - name: Locate curl.exe
+        run: |
+          Get-ChildItem -Path C:\ -Filter curl.exe -Recurse -ErrorAction SilentlyContinue
+      - name: Locate easy.h
+        run: |
+          Get-ChildItem -Path C:\ -Filter easy.h -Recurse -ErrorAction SilentlyContinue
 #      - name: phpize
 #        run: |
 #          phpize

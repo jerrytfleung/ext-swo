@@ -6,7 +6,7 @@ if (PHP_SWO != 'no') {
     AC_DEFINE('HAVE_SWO', 1, 'swo support enabled');
 
     var curl_location;
-    if ((curl_location = CHECK_LIB("libcurl_a.lib;libcurl.lib", "swo", "C:\\Miniconda\\Library\\lib")) &&
+    if ((curl_location = CHECK_LIB("libcurl_a.lib;libcurl.lib", "swo", PHP_SWO)) &&
         CHECK_HEADER_ADD_INCLUDE("curl/easy.h", "CFLAGS_SWO", "C:\\Miniconda\\Library\\include")) {
         EXTENSION('swo', 'swo.c setting_service_c_wrapper.cpp setting_service.cpp service.cpp', PHP_SWO_SHARED, '/DZEND_ENABLE_STATIC_TSRMLS_CACHE=1 /EHsc');
         AC_DEFINE('HAVE_SWO', 1, "Define to 1 if the PHP extension 'swo' is available.");

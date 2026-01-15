@@ -4,6 +4,7 @@ ARG_ENABLE('swo', 'swo support', 'no');
 
 if (PHP_SWO != 'no') {
     AC_DEFINE('HAVE_SWO', 1, 'swo support enabled');
+    DEFINE('SEARCH_PATH','C:\\Miniconda');
 
     MESSAGE('=========');
     MESSAGE(CHECK_LIB("normaliz.lib", "curl", PHP_SWO));
@@ -14,7 +15,7 @@ if (PHP_SWO != 'no') {
     MESSAGE('=========');
 
     var curl_location;
-    if ((curl_location = CHECK_LIB("libcurl_a.lib;libcurl.lib", "curl", PHP_SWO)) &&
+    if ((curl_location = CHECK_LIB("libcurl_a.lib;libcurl.lib", "curl", SEARCH_PATH)) &&
         CHECK_HEADER_ADD_INCLUDE("curl/easy.h", "CFLAGS_SWO") &&
         SETUP_OPENSSL("curl", PHP_SWO) >= 2 &&
         CHECK_LIB("winmm.lib", "curl", PHP_SWO) &&

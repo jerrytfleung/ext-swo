@@ -107,7 +107,7 @@ jobs:
 #          Get-ChildItem -Path C:\ -Filter easy.h -Recurse -ErrorAction SilentlyContinue
       - name: list directory
         run: |
-          dir C:\\Miniconda\\Library /S
+          dir C:\Miniconda\Library /S
         shell: powershell
       - name: phpize
         run: |

@@ -90,9 +90,6 @@ jobs:
         with:
           arch: x64
           toolset: ${{ steps.setup-php-sdk.outputs.toolset }}
-      - name: Install nghttp2
-        run: |
-          choco install nghttp2
 #      - name: list extensions
 #        run: |
 #          php -m

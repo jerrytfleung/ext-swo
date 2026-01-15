@@ -1,26 +1,21 @@
+// vim:ft=javascript
+
 ARG_ENABLE('swo', 'swo support', 'no');
 
 if (PHP_SWO != 'no') {
     AC_DEFINE('HAVE_SWO', 1, 'swo support enabled');
+
     var curl_location;
-	if ((curl_location = CHECK_LIB("libcurl_a.lib;libcurl.lib", "curl", PHP_CURL)) &&
-		CHECK_HEADER_ADD_INCLUDE("curl/easy.h", "CFLAGS_CURL") &&
-		SETUP_OPENSSL("curl", PHP_CURL) >= 2 &&
-		CHECK_LIB("winmm.lib", "curl", PHP_CURL) &&
-		CHECK_LIB("wldap32.lib", "curl", PHP_CURL) &&
-		SETUP_ZLIB_LIB("curl", PHP_CURL) &&
-		(CHECK_LIB("normaliz.lib", "curl", PHP_CURL) &&
-		 CHECK_LIB("libssh2.lib", "curl", PHP_CURL) &&
-		 CHECK_LIB("nghttp2.lib", "curl", PHP_CURL))
-		) {
-        EXTENSION('swo', 'swo.c service.cpp setting_service.cpp setting_service_c_wrapper.cpp');
-		AC_DEFINE('HAVE_CURL', 1, "Define to 1 if the PHP extension 'curl' is available.");
-		ADD_FLAG("CFLAGS_CURL", "/D PHP_CURL_EXPORTS=1");
-		if (curl_location.match(/libcurl_a\.lib$/)) {
-		    ADD_FLAG("CFLAGS_CURL", "/D CURL_STATICLIB");
-		}
-		PHP_INSTALL_HEADERS("ext/curl", "php_curl.h");
-	} else {
-		WARNING("curl not enabled; libraries and headers not found");
-	}
+    if ((curl_location = CHECK_LIB("libcurl_a.lib;libcurl.lib", "swo", "C:\\Miniconda\\Library")) &&
+        CHECK_HEADER_ADD_INCLUDE("curl/easy.h", "CFLAGS_SWO", "C:\\Miniconda\\Library\\include")) {
+        EXTENSION('swo', 'swo.c setting_service_c_wrapper.cpp setting_service.cpp service.cpp', PHP_SWO_SHARED, '/DZEND_ENABLE_STATIC_TSRMLS_CACHE=1 /EHsc');
+        AC_DEFINE('HAVE_SWO', 1, "Define to 1 if the PHP extension 'swo' is available.");
+        ADD_FLAG("CFLAGS_SWO", "/D PHP_SWO_EXPORTS=1");
+        if (curl_location.match(/libcurl_a\.lib$/)) {
+            ADD_FLAG("CFLAGS_CURL", "/D CURL_STATICLIB");
+        }
+        PHP_INSTALL_HEADERS("swo", "php_swo.h");
+    } else {
+        WARNING("swo not enabled; curl libraries and headers not found");
+    }
 }

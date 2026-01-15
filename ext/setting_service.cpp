@@ -1,6 +1,8 @@
 #include "setting_service.h"
+#ifndef _WIN32
 #include <sys/types.h>
 #include <unistd.h>
+#endif
 #include <time.h>
 #include "php.h"
 

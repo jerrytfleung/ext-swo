@@ -69,7 +69,7 @@ PHP_MINIT_FUNCTION(swo) {
 
 /* {{{ PHP_MSHUTDOWN_FUNCTION */
 PHP_MSHUTDOWN_FUNCTION(swo) {
-  Setting_Service_Free(SWO_G(setting_service));
+  // Setting_Service_Free(SWO_G(setting_service));
 
   UNREGISTER_INI_ENTRIES();
 

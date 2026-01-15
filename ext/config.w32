@@ -6,20 +6,6 @@ if (PHP_SWO != 'no') {
     AC_DEFINE('HAVE_SWO', 1, 'swo support enabled');
 
     MESSAGE('=========');
-    MESSAGE(PHP_SWO);
-    MESSAGE('=========');
-    MESSAGE(CHECK_LIB("libcurl_a.lib;libcurl.lib", "curl", PHP_SWO));
-    MESSAGE('=========');
-    MESSAGE(CHECK_HEADER_ADD_INCLUDE("curl/easy.h", "CFLAGS_SWO"));
-    MESSAGE('=========');
-    MESSAGE(SETUP_OPENSSL("curl", PHP_SWO));
-    MESSAGE('=========');
-    MESSAGE(CHECK_LIB("winmm.lib", "curl", PHP_SWO));
-    MESSAGE('=========');
-    MESSAGE(CHECK_LIB("wldap32.lib", "curl", PHP_SWO));
-    MESSAGE('=========');
-    dnl MESSAGE(SETUP_ZLIB_LIB("curl", PHP_SWO));
-    dnl MESSAGE('=========');
     MESSAGE(CHECK_LIB("normaliz.lib", "curl", PHP_SWO));
     MESSAGE('=========');
     MESSAGE(CHECK_LIB("libssh2.lib", "curl", PHP_SWO));

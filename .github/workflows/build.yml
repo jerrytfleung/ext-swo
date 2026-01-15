@@ -108,6 +108,7 @@ jobs:
       - name: echo CONDA
         run: |
           echo $CONDA
+        shell: powershell
       - name: phpize
         run: |
           phpize

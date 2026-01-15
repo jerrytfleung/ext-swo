@@ -22,11 +22,10 @@ namespace Solarwinds {
         // service name
         auto pos = service_key.find_last_of(':');
         auto service_name = (pos != std::string::npos) ? service_key.substr(pos+1) : "unknown";
-        // url
-        auto url = "https://" + collector + "/v1/settings/" + service_name + "/" + hostname;
         // curl init
         curl_ = curl_easy_init();
         // url
+        auto url = "https://" + collector + "/v1/settings/" + service_name + "/" + hostname;
         curl_easy_setopt(curl_, CURLOPT_URL, url.c_str());
         curl_easy_setopt(curl_, CURLOPT_FOLLOWLOCATION, 1L);
         // ssl options

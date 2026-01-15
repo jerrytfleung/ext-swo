@@ -67,17 +67,6 @@ jobs:
 #        env:
 #          TEST_PHP_ARGS: "-q" #do not try to submit failures
 #        run: make test TESTS=--show-diff
-  windows-understand:
-    runs-on: windows-2022
-    steps:
-      - name: Checkout
-        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
-      - name: Locate libcurl.lib
-        run: |
-          Get-ChildItem -Path C:\ -Filter libcurl.lib -Recurse -ErrorAction SilentlyContinue
-      - name: Locate easy.h
-        run: |
-          Get-ChildItem -Path C:\ -Filter easy.h -Recurse -ErrorAction SilentlyContinue
   windows:
     runs-on: windows-2022
     continue-on-error: false

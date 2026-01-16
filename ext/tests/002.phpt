@@ -1,9 +1,9 @@
 --TEST--
 \Solarwinds\Sampler\setting() Basic test
 --EXTENSIONS--
-swo
+apm_ext
 --INI--
-swo.service_key=token:unknown
+apm_ext.service_key=token:unknown
 --FILE--
 <?php
 $ret = \Solarwinds\Sampler\setting();

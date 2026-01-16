@@ -48,4 +48,4 @@ config.h.in~
 service.dep
 setting_service.dep
 setting_service_c_wrapper.dep
-swo.dep
+apm_ext.dep

@@ -70,7 +70,7 @@ jobs:
       - name: build
         run: |
           phpize
-          ./configure --enable-swo --with-prefix=${{ steps.setup-php-sdk.outputs.prefix }}
+          ./configure --enable-apm_ext --with-prefix=${{ steps.setup-php-sdk.outputs.prefix }}
           nmake
       - name: Test
         env:
@@ -86,14 +86,14 @@ jobs:
           esac
           echo "Detected Compiler: $COMPILER"
           SAFE_REF_NAME="${GITHUB_REF_NAME//\//-}"
-          BUILD_NAME="php_swo-${SAFE_REF_NAME}-${{matrix.php}}-${{matrix.ts}}-$COMPILER-x64"
+          BUILD_NAME="php_apm_ext-${SAFE_REF_NAME}-${{matrix.php}}-${{matrix.ts}}-$COMPILER-x64"
           echo "Build Name: $BUILD_NAME"
           echo "BUILD_NAME=$BUILD_NAME" >> $GITHUB_ENV
 
       - name: Rename and copy binaries
         run: |
           md binaries\${{env.BUILD_NAME}}
-          $file = Get-ChildItem -Path x64 -Recurse -Filter php_swo.dll
+          $file = Get-ChildItem -Path x64 -Recurse -Filter php_apm_ext.dll
           Copy-Item -Path $file.FullName -Destination "binaries\${{env.BUILD_NAME}}\${{env.BUILD_NAME}}.dll"
       - name: Find
         run: |

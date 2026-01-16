@@ -1,10 +1,10 @@
 --TEST--
-Check if swo is loaded
+Check if apm_ext is loaded
 --EXTENSIONS--
-swo
+apm_ext
 --FILE--
 <?php
-echo 'The extension "swo" is available';
+echo 'The extension "apm_ext" is available';
 ?>
 --EXPECT--
-The extension "swo" is available
+The extension "apm_ext" is available
